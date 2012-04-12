@@ -586,15 +586,15 @@ Raphael.fn.graf = (function () {
         
         var axis = raphael.set();
         var scale = raphael.path("M" + attrs.cx + " " + attrs.cy + 
-                                 "L" + x2 + " " + y2).attr({stroke: "#000"});
+                                 "L" + x2 + " " + y2).attr({stroke: "#FFF"});
         axis.push(scale);
         var ticklabels = [];
         var ticks = [];
         for (var i = 0; i < attrs.numticks; i++) {
             var p = pi(i);
-            var notch = raphael.circle(p.x, p.y, 1).attr("fill", "#444");
-            axis.push(notch);
-            ticks.push(notch);
+            //var notch = raphael.circle(p.x, p.y, 1).attr("fill", "#FFFFFF");
+            //axis.push(notch);
+            //ticks.push(notch);
             // Raphael 0.6.4 does not align labels properly in IE
             var ticklabel = raphael.text(p.x, p.y, labels[i]).attr("fill", "#000");
             axis.push(ticklabel);
@@ -636,7 +636,7 @@ Raphael.fn.graf = (function () {
             // TODO: add support for orientation
         };
         var grid = raphael.set();
-        var gridattrs = { stroke: "#000", "stroke-dasharray": ". "};
+        var gridattrs = { stroke: "#e0e0e0", "stroke-dasharray": ". "};
         var bg = raphael.rect(attrs.cx, attrs.cy, w, h).attr({stroke: "none"});
         grid.push(bg);
         var hlines = raphael.set();
@@ -674,8 +674,8 @@ Raphael.fn.graf = (function () {
             overrun: params["overrun"] || 0.1,
             labeloverrun: params["labeloverrun"] || 0,
             fill: params["fill"] || "auto",
-            stroke: params["stroke"] || ((type == "line") ? "auto" : "#000"),
-            barwidth: params["barwidth"] || 0.8,
+            stroke: params["stroke"] || ((type == "line") ? "auto" : "#FFF"),
+            barwidth: params["barwidth"] || 0.6,
             numticks: params["numticks"] || 5,
             stacked: params["stacked"] || false
             // TODO: add support for orientation
@@ -753,6 +753,14 @@ Raphael.fn.graf = (function () {
                 svg.push(dataset);
                 datasets.push(dataset);
             } else if (type == "bar") {
+                if( i % 2 == 0) {
+                    datafill = "#2f69bf";
+                    datastroke = "#2f69bf";
+                }
+                else {
+                    datafill = "#a2bf2f";
+                    datastroke = "#a2bf2f";
+                }
                 var dsparams = {
                     min: attrs.min,
                     rect: { fill: datafill, stroke: datastroke } 
